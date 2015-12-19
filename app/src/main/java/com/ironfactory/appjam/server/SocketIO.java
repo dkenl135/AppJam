@@ -7,6 +7,7 @@ import android.util.Log;
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
+import com.ironfactory.appjam.Global;
 import com.ironfactory.appjam.entity.UserEntity;
 
 import org.json.JSONException;
@@ -20,16 +21,6 @@ public class SocketIO {
     private static Handler handler = new Handler();
     private static final String SERVER_URL = "http://appjam-server.herokuapp.com";
     private static final String TAG = "SocketIO";
-
-    public static final String LOGIN = "login";
-    public static final String SIGN_UP = "signUp";
-
-    public static final String CODE = "code";
-    public static final String NAME = "name";
-    public static final String PHONE = "phone";
-
-
-    public static final String USER = "user";
 
 
     public static Socket socket;
@@ -66,7 +57,7 @@ public class SocketIO {
 
 
     private static int getCode(JSONObject object) throws JSONException{
-        int code = object.getInt(CODE);
+        int code = object.getInt(Global.CODE);
         return code;
     }
 
@@ -74,17 +65,17 @@ public class SocketIO {
     public static void login(String name, String phone, final RequestInterface.OnLogin onLogin) {
         try {
             JSONObject reqObject = new JSONObject();
-            reqObject.put(NAME, name);
-            reqObject.put(PHONE, phone);
-            socket.emit(LOGIN, reqObject);
-            socket.once(LOGIN, new Emitter.Listener() {
+            reqObject.put(Global.NAME, name);
+            reqObject.put(Global.PHONE, phone);
+            socket.emit(Global.LOGIN, reqObject);
+            socket.once(Global.LOGIN, new Emitter.Listener() {
                 @Override
                 public void call(Object... args) {
                     try {
                         JSONObject resObject = getJson(args);
                         final int code = getCode(resObject);
                         if (code == 200) {
-                            JSONObject userObject = resObject.getJSONObject(USER);
+                            JSONObject userObject = resObject.getJSONObject(Global.USER);
                             final UserEntity userEntity = new UserEntity(userObject);
                             handler.post(new Runnable() {
                                 @Override
@@ -115,17 +106,17 @@ public class SocketIO {
     public static void signUp(String name, String phone, final RequestInterface.OnSignUp onSignUp) {
         try {
             JSONObject reqObject = new JSONObject();
-            reqObject.put(NAME, name);
-            reqObject.put(PHONE, phone);
-            socket.emit(SIGN_UP, reqObject);
-            socket.once(SIGN_UP, new Emitter.Listener() {
+            reqObject.put(Global.NAME, name);
+            reqObject.put(Global.PHONE, phone);
+            socket.emit(Global.SIGN_UP, reqObject);
+            socket.once(Global.SIGN_UP, new Emitter.Listener() {
                 @Override
                 public void call(Object... args) {
                     try {
                         JSONObject resObject = getJson(args);
                         final int code = getCode(resObject);
                         if (code == 200) {
-                            JSONObject userObject = resObject.getJSONObject(USER);
+                            JSONObject userObject = resObject.getJSONObject(Global.USER);
                             final UserEntity userEntity = new UserEntity(userObject);
                             handler.post(new Runnable() {
                                 @Override

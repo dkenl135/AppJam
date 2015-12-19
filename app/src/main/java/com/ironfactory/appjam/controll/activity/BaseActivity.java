@@ -28,7 +28,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         context = getApplicationContext();
     }
 
-    protected abstract void init();
+    protected abstract void init(int resId);
+
+    protected abstract void setListener();
 
     public static void showProgress() {
         if (materialDialog != null) {
