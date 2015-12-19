@@ -1,4 +1,4 @@
-package com.ironfactory.appjam.controll;
+package com.ironfactory.appjam.controll.activity;
 
 import android.content.Context;
 import android.os.Bundle;
