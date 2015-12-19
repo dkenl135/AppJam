@@ -1,14 +1,22 @@
 package com.ironfactory.appjam.controll.fragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.ironfactory.appjam.Global;
 import com.ironfactory.appjam.R;
+import com.ironfactory.appjam.controll.adapter.RankAdapter;
+import com.ironfactory.appjam.dtos.PictureDto;
+import com.ironfactory.appjam.server.RequestInterface;
+import com.ironfactory.appjam.server.RequestManager;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,46 +27,13 @@ import com.ironfactory.appjam.R;
  * create an instance of this fragment.
  */
 public class RankFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    private OnFragmentInteractionListener mListener;
+    private static final String TAG = "RankFragment";
+    private RecyclerView recyclerView;
+    private RankAdapter adapter;
 
     public RankFragment() {
         // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment RankFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static RankFragment newInstance(String param1, String param2) {
-        RankFragment fragment = new RankFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -68,42 +43,42 @@ public class RankFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_rank, container, false);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        init(getView());
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
+
+
+    private void init(View rootView) {
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.fragment_rank_recycler);
+
+        setRecyclerView();
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+
+    private void setRecyclerView() {
+        LinearLayoutManager manager = new LinearLayoutManager(getContext());
+        manager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(manager);
+        adapter = new RankAdapter(new ArrayList<PictureDto>());
+
+        RequestManager.getRankImages(new RequestInterface.OnGetRankImages() {
+            @Override
+            public void onSuccess(ArrayList<PictureDto> pictureDtos) {
+                adapter.setPictures(pictureDtos);
+            }
+
+            @Override
+            public void onException() {
+                new MaterialDialog.Builder(getContext())
+                        .title("에러")
+                        .content("내 그림 받아오기에 실패했습니다")
+                        .show();
+            }
+        });
     }
+
 }

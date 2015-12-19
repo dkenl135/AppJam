@@ -50,7 +50,7 @@ public class LoginActivity extends BaseActivity {
                 public void onSuccess(UserEntity userEntity) {
                     hideProgress();
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    intent.putExtra(Global.USER, userEntity);
+                    Global.userEntity = userEntity;
                     startActivity(intent);
                     finish();
                 }
@@ -101,7 +101,7 @@ public class LoginActivity extends BaseActivity {
                             editor.commit();
 
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                            intent.putExtra(Global.USER, userEntity);
+                            Global.userEntity = userEntity;
                             startActivity(intent);
                             finish();
                         }

@@ -8,7 +8,7 @@ import org.json.JSONObject;
 /**
  * Created by IronFactory on 2015. 12. 19..
  */
-public class PictureEntity {
+public class ImageEntity {
 
     public static final String PROPERTY_CREATED = "imageCreated";
     public static final String PROPERTY_ID = "imageId";
@@ -22,7 +22,7 @@ public class PictureEntity {
     private String subject;
     private String title;
 
-    public PictureEntity(JSONObject object) {
+    public ImageEntity(JSONObject object) {
         try {
             id = object.getString(Global.ID);
             created = object.getLong(Global.CREATED);
@@ -34,7 +34,7 @@ public class PictureEntity {
         }
     }
 
-    public PictureEntity() {
+    public ImageEntity() {
     }
 
 

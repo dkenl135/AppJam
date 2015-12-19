@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.ironfactory.appjam.R;
 import com.ironfactory.appjam.controll.activity.BaseActivity;
 import com.ironfactory.appjam.dtos.PictureDto;
-import com.ironfactory.appjam.entities.PictureEntity;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
@@ -19,11 +18,11 @@ import java.util.ArrayList;
 /**
  * Created by IronFactory on 2015. 12. 19..
  */
-public class MyPictureAdaper extends RecyclerView.Adapter<MyPictureAdaper.ViewHolder> {
+public class MyPictureAdapter extends RecyclerView.Adapter<MyPictureAdapter.ViewHolder> {
 
     private ArrayList<PictureDto> pictures;
 
-    public MyPictureAdaper(ArrayList<PictureDto> pictures) {
+    public MyPictureAdapter(ArrayList<PictureDto> pictures) {
         this.pictures = pictures;
     }
 
@@ -37,12 +36,12 @@ public class MyPictureAdaper extends RecyclerView.Adapter<MyPictureAdaper.ViewHo
     public void onBindViewHolder(ViewHolder holder, int position) {
         PictureDto pictureEntity = pictures.get(position);
         SimpleDateFormat format = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분");
-        String created = format.format(pictureEntity.pictureEntity.getCreated());
+        String created = format.format(pictureEntity.imageEntity.getCreated());
         holder.nameText.setText(pictureEntity.userEntity.getName());
-        holder.subjectText.setText(pictureEntity.pictureEntity.getSubject());
+        holder.subjectText.setText(pictureEntity.imageEntity.getSubject());
         holder.createdText.setText(created);
         Picasso.with(BaseActivity.context)
-                .load("http://" + pictureEntity.pictureEntity.getId() + pictureEntity.pictureEntity.getCreated())
+                .load("http://" + pictureEntity.imageEntity.getId() + pictureEntity.imageEntity.getCreated())
                 .into(holder.pictureImage);
     }
 
@@ -50,6 +49,12 @@ public class MyPictureAdaper extends RecyclerView.Adapter<MyPictureAdaper.ViewHo
     public int getItemCount() {
         return pictures.size();
     }
+
+    public void setPictures(ArrayList<PictureDto> pictureDtos) {
+        pictures = pictureDtos;
+        notifyDataSetChanged();
+    }
+
 
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView nameText;
