@@ -1,6 +1,8 @@
-package com.ironfactory.appjam;
+package com.ironfactory.appjam.controll;
 
 import android.os.Bundle;
+
+import com.ironfactory.appjam.R;
 
 public class MainActivity extends BaseActivity {
 
@@ -13,6 +15,5 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void init() {
-
     }
 }
