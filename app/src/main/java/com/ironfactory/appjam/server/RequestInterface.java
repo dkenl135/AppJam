@@ -1,6 +1,6 @@
 package com.ironfactory.appjam.server;
 
-import com.ironfactory.appjam.entity.UserEntity;
+import com.ironfactory.appjam.entities.UserEntity;
 
 /**
  * Created by IronFactory on 2015. 12. 19..

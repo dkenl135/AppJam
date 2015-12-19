@@ -14,7 +14,7 @@ import android.widget.EditText;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.ironfactory.appjam.Global;
 import com.ironfactory.appjam.R;
-import com.ironfactory.appjam.entity.UserEntity;
+import com.ironfactory.appjam.entities.UserEntity;
 import com.ironfactory.appjam.server.RequestInterface;
 import com.ironfactory.appjam.server.RequestManager;
 
@@ -75,6 +75,8 @@ public class LoginActivity extends BaseActivity {
         setContentView(resId);
         loginButton = (Button) findViewById(R.id.activity_login_button);
         nameEdit = (EditText) findViewById(R.id.activity_login_name);
+
+        setListener();
     }
 
 
@@ -85,6 +87,8 @@ public class LoginActivity extends BaseActivity {
             public void onClick(View v) {
                 String phone = getPhone();
                 String name = nameEdit.getText().toString();
+                Log.d(TAG, "phone = " + phone);
+                Log.d(TAG, "name = " + name);
 
                 if (!TextUtils.isEmpty(phone) && !TextUtils.isEmpty(name)) {
                     showProgress();

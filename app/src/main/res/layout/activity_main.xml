@@ -14,18 +14,21 @@
         android:weightSum="3">
 
         <Button
+            android:id="@+id/activity_main_picture"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="그리기" />
 
         <Button
+            android:id="@+id/activity_main_myPicture"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="내 그림" />
 
         <Button
+            android:id="@+id/activity_main_rank"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -33,6 +36,7 @@
     </LinearLayout>
 
     <FrameLayout
+        android:id="@+id/activity_main_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="8.5">

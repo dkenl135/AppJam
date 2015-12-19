@@ -8,7 +8,7 @@ import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
 import com.ironfactory.appjam.Global;
-import com.ironfactory.appjam.entity.UserEntity;
+import com.ironfactory.appjam.entities.UserEntity;
 
 import org.json.JSONException;
 import org.json.JSONObject;

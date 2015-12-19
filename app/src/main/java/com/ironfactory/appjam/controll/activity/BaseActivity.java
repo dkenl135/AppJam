@@ -2,7 +2,6 @@ package com.ironfactory.appjam.controll.activity;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -15,12 +14,12 @@ public abstract class BaseActivity extends AppCompatActivity {
     public static Context context;
     public static MaterialDialog materialDialog;
 
+
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         context = getApplicationContext();
     }
-
 
     @Override
     protected void onResume() {

@@ -4,6 +4,9 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +22,8 @@ import com.ironfactory.appjam.R;
  * create an instance of this fragment.
  */
 public class MyPictureFragment extends Fragment {
+    private static final String TAG = "MyPictureFragment";
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -29,6 +34,14 @@ public class MyPictureFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+
+
+
+
+    private RecyclerView recyclerView;
+
+
 
     public MyPictureFragment() {
         // Required empty public constructor
@@ -64,16 +77,28 @@ public class MyPictureFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        Log.d(TAG, "onCreateView");
         return inflater.inflate(R.layout.fragment_my_picture, container, false);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Log.d(TAG, "onActivityCreated");
+        init(getView());
     }
+
+
+
+    private void init(View rootView) {
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.fragment_my_picture_recycler);
+        LinearLayoutManager manager = new LinearLayoutManager(getContext());
+        manager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(manager);
+
+    }
+
 
     @Override
     public void onAttach(Context context) {
