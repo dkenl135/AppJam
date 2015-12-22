@@ -19,19 +19,11 @@ import com.ironfactory.appjam.server.RequestManager;
 
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link MyPictureFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link MyPictureFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class MyPictureFragment extends Fragment {
     private static final String TAG = "MyPictureFragment";
+
     private RecyclerView recyclerView;
     private MyPictureAdapter adapter;
-
 
 
     public MyPictureFragment() {

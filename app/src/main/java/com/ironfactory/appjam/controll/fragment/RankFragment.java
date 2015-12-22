@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.ironfactory.appjam.Global;
 import com.ironfactory.appjam.R;
 import com.ironfactory.appjam.controll.adapter.RankAdapter;
 import com.ironfactory.appjam.dtos.PictureDto;
@@ -18,14 +17,6 @@ import com.ironfactory.appjam.server.RequestManager;
 
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link RankFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link RankFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class RankFragment extends Fragment {
 
     private static final String TAG = "RankFragment";
@@ -64,6 +55,7 @@ public class RankFragment extends Fragment {
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(manager);
         adapter = new RankAdapter(new ArrayList<PictureDto>());
+        recyclerView.setAdapter(adapter);
 
         RequestManager.getRankImages(new RequestInterface.OnGetRankImages() {
             @Override

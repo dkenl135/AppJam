@@ -10,6 +10,7 @@ public class Global {
     public static final String LOGIN = "login";
     public static final String SIGN_UP = "signUp";
     public static final String GET_MY_IMAGES = "getMyImages";
+    public static final String GET_IMAGES = "getImages";
     public static final String GET_RANK_IMAGES = "getRankImages";
 
     public static final String CODE = "code";

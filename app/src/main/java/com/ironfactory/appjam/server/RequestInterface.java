@@ -10,6 +10,15 @@ import java.util.ArrayList;
  */
 public class RequestInterface {
 
+    public interface OnGetImages {
+        void onSuccess(ArrayList<PictureDto> pictureDtos);
+        void onException();
+    }
+
+    public interface OnInsertImage {
+        void onSuccess();
+        void onException();
+    }
 
     public interface OnGetRankImages {
         void onSuccess(ArrayList<PictureDto> pictureDtos);

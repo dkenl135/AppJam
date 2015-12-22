@@ -1,14 +1,14 @@
 package com.ironfactory.appjam.entities;
 
-import com.ironfactory.appjam.Global;
-
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.Serializable;
 
 /**
  * Created by IronFactory on 2015. 12. 19..
  */
-public class ImageEntity {
+public class ImageEntity implements Serializable {
 
     public static final String PROPERTY_CREATED = "imageCreated";
     public static final String PROPERTY_ID = "imageId";
@@ -24,17 +24,24 @@ public class ImageEntity {
 
     public ImageEntity(JSONObject object) {
         try {
-            id = object.getString(Global.ID);
-            created = object.getLong(Global.CREATED);
-            userId = object.getInt(Global.USER_ID);
-            subject = object.getString(Global.SUBJECT);
-            title = object.getString(Global.TITLE);
+            id = object.getString(PROPERTY_ID);
+            created = object.getLong(PROPERTY_CREATED);
+            userId = object.getInt(PROPERTY_USER_ID);
+            subject = object.getString(PROPERTY_SUBJECT);
+            title = object.getString(PROPERTY_TITLE);
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
     public ImageEntity() {
+    }
+
+
+    public boolean isSame(ImageEntity imageEntity) {
+        if (!id.equals(imageEntity.id))
+            return false;
+        return true;
     }
 
 

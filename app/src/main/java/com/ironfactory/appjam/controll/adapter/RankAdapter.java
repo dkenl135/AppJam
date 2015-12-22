@@ -11,6 +11,9 @@ import android.widget.TextView;
 import com.ironfactory.appjam.R;
 import com.ironfactory.appjam.controll.activity.BaseActivity;
 import com.ironfactory.appjam.dtos.PictureDto;
+import com.ironfactory.appjam.entities.ImageEntity;
+import com.ironfactory.appjam.entities.LikeEntity;
+import com.ironfactory.appjam.entities.UserEntity;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
@@ -37,21 +40,24 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         PictureDto pictureEntity = pictures.get(position);
+        UserEntity userEntity = pictureEntity.userEntities.get(0);
+        ImageEntity imageEntity = pictureEntity.imageEntities.get(0);
+        LikeEntity likeEntity = pictureEntity.likeEntities.get(0);
+
         SimpleDateFormat format = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분");
-        String created = format.format(pictureEntity.imageEntity.getCreated());
-        holder.nameText.setText(pictureEntity.userEntity.getName());
-        holder.subjectText.setText(pictureEntity.imageEntity.getSubject());
+        String created = format.format(imageEntity.getCreated());
+        holder.subjectText.setText(imageEntity.getSubject());
         holder.createdText.setText(created);
         Picasso.with(BaseActivity.context)
-                .load("http://" + pictureEntity.imageEntity.getId() + pictureEntity.imageEntity.getCreated())
+                .load("http://appjam-server.herokuapp.com/" + imageEntity.getId() + imageEntity.getCreated())
                 .into(holder.pictureImage);
 
-        if (pictureEntity.likeEntity.getImageId() == 0) {
+        if (likeEntity.getImageId() == 0) {
             Log.d(TAG, "좋아요 없음");
-            holder.likeImage.setBackgroundResource(R.drawable.md_btn_selected);
+            holder.likeImage.setBackgroundResource(R.drawable.unlike_button);
         } else {
             Log.d(TAG, "좋아요 있음");
-            holder.likeImage.setBackgroundResource(R.drawable.md_btn_selected);
+            holder.likeImage.setBackgroundResource(R.drawable.like_button);
         }
     }
 
@@ -67,7 +73,6 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewHolder> {
 
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView nameText;
         TextView subjectText;
         TextView createdText;
         TextView likeText;
@@ -77,12 +82,11 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewHolder> {
         public ViewHolder(View itemView) {
             super(itemView);
 
-            nameText = (TextView) itemView.findViewById(R.id.item_rank_name);
-            subjectText = (TextView) itemView.findViewById(R.id.item_rank_subject);
-            createdText = (TextView) itemView.findViewById(R.id.item_rank_created);
-            likeText = (TextView) itemView.findViewById(R.id.item_rank_like);
+            subjectText = (TextView) itemView.findViewById(R.id.item_rank_subject_text);
+            createdText = (TextView) itemView.findViewById(R.id.item_rank_day_text);
+            likeText = (TextView) itemView.findViewById(R.id.item_rank_like_num_text);
             pictureImage = (ImageView) itemView.findViewById(R.id.item_rank_image);
-            likeImage = (ImageView) itemView.findViewById(R.id.item_rank_like_image);
+            likeImage = (ImageView) itemView.findViewById(R.id.item_rank_like_button);
         }
     }
 }

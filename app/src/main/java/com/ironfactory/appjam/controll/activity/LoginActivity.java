@@ -17,6 +17,7 @@ import com.ironfactory.appjam.R;
 import com.ironfactory.appjam.entities.UserEntity;
 import com.ironfactory.appjam.server.RequestInterface;
 import com.ironfactory.appjam.server.RequestManager;
+import com.ironfactory.appjam.server.SocketIO;
 
 public class LoginActivity extends BaseActivity {
 
@@ -28,6 +29,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        new SocketIO(getApplicationContext());
         if (!getData()) {
             Log.d(TAG, "로그인 레이아웃 구성");
             init(R.layout.activity_login);
@@ -57,7 +59,7 @@ public class LoginActivity extends BaseActivity {
 
                 @Override
                 public void onException() {
-                    new MaterialDialog.Builder(getApplicationContext())
+                    new MaterialDialog.Builder(BaseActivity.context)
                             .title("에러 발생")
                             .content("로그인 중 에러가 발생했습니다")
                             .show();
@@ -108,7 +110,7 @@ public class LoginActivity extends BaseActivity {
 
                         @Override
                         public void onException() {
-                            new MaterialDialog.Builder(getApplicationContext())
+                            new MaterialDialog.Builder(BaseActivity.context)
                                     .title("에러 발생")
                                     .content("로그인 중 에러가 발생했습니다")
                                     .show();

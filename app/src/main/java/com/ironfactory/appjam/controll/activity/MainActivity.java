@@ -1,9 +1,11 @@
 package com.ironfactory.appjam.controll.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.ironfactory.appjam.Global;
 import com.ironfactory.appjam.R;
 import com.ironfactory.appjam.controll.fragment.MyPictureFragment;
 import com.ironfactory.appjam.controll.fragment.PictureFragment;
@@ -11,6 +13,7 @@ import com.ironfactory.appjam.controll.fragment.RankFragment;
 
 public class MainActivity extends BaseActivity {
 
+    private static final String TAG = "MainActivity";
     private Button pictureBtn;
     private Button myPictureBtn;
     private Button rankBtn;
@@ -28,6 +31,8 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void init(int resId) {
         setContentView(resId);
+
+        Log.d(TAG, "id = " + Global.userEntity.getId());
 
         pictureBtn = (Button) findViewById(R.id.activity_main_picture);
         myPictureBtn = (Button) findViewById(R.id.activity_main_myPicture);

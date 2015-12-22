@@ -3,10 +3,12 @@ package com.ironfactory.appjam.entities;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
+
 /**
  * Created by IronFactory on 2015. 12. 19..
  */
-public class LikeEntity {
+public class LikeEntity implements Serializable {
     public static final String PROPERTY_USER_ID = "likeUserId";
     public static final String PROPERTY_IMAGE_ID = "likeImageId";
     public static final String PROPERTY_IMAGE_CREATED = "likeImageCreated";

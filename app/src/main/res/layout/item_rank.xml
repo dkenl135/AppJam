@@ -18,7 +18,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/fragment_my_picture_image"/>
+                android:id="@+id/item_rank_image"/>
 
         </LinearLayout>
 
@@ -36,24 +36,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="이름 : " />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="김지민"
-                    android:id="@+id/fragment_my_picture_name_text"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <TextView
+                    android:id="@+id/item_rank_subject_text"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="주제 : " />
@@ -61,8 +44,15 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="치킨"
-                    android:id="@+id/fragment_my_picture_subject_text"/>
+                    android:text="치킨" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
             </LinearLayout>
 
             <LinearLayout
@@ -72,10 +62,10 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/item_rank_day_text"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="1"
-                    android:id="@+id/fragment_my_picture_day_text"/>
+                    android:text="1" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -84,6 +74,46 @@
             </LinearLayout>
         </LinearLayout>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="좋아요 : " />
+
+            <TextView
+                android:id="@+id/item_rank_like_num_text"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="1,219" />
+        </LinearLayout>
+
+
+        <FrameLayout
+            android:layout_width="32dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="16dp">
+
+            <ImageView
+                android:id="@+id/item_rank_like_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible"
+                android:background="@drawable/unlike_button"/>
+        </FrameLayout>
     </LinearLayout>
 
 </LinearLayout>

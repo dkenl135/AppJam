@@ -11,6 +11,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
+    private static final String TAG = "BaseActivity";
     public static Context context;
     public static MaterialDialog materialDialog;
 
@@ -18,13 +19,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        context = getApplicationContext();
+        context = this;
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        context = getApplicationContext();
+        context = this;
     }
 
     protected abstract void init(int resId);
@@ -36,7 +37,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             materialDialog.hide();
         }
 
-        materialDialog = new MaterialDialog.Builder(BaseActivity.context)
+        materialDialog = new MaterialDialog.Builder(context)
                 .title("잠시만 기다려주세요")
                 .progress(true, 0)
                 .show();

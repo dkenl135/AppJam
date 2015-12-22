@@ -10,6 +10,9 @@ import android.widget.TextView;
 import com.ironfactory.appjam.R;
 import com.ironfactory.appjam.controll.activity.BaseActivity;
 import com.ironfactory.appjam.dtos.PictureDto;
+import com.ironfactory.appjam.entities.ImageEntity;
+import com.ironfactory.appjam.entities.LikeEntity;
+import com.ironfactory.appjam.entities.UserEntity;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
@@ -35,13 +38,17 @@ public class MyPictureAdapter extends RecyclerView.Adapter<MyPictureAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         PictureDto pictureEntity = pictures.get(position);
+        UserEntity userEntity = pictureEntity.userEntities.get(0);
+        ImageEntity imageEntity = pictureEntity.imageEntities.get(0);
+        LikeEntity likeEntity = pictureEntity.likeEntities.get(0);
+
         SimpleDateFormat format = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분");
-        String created = format.format(pictureEntity.imageEntity.getCreated());
-        holder.nameText.setText(pictureEntity.userEntity.getName());
-        holder.subjectText.setText(pictureEntity.imageEntity.getSubject());
+        String created = format.format(imageEntity.getCreated());
+        holder.nameText.setText(userEntity.getName());
+        holder.subjectText.setText(imageEntity.getSubject());
         holder.createdText.setText(created);
         Picasso.with(BaseActivity.context)
-                .load("http://" + pictureEntity.imageEntity.getId() + pictureEntity.imageEntity.getCreated())
+                .load("http://appjam-server.herokuapp.com/" + imageEntity.getId() + imageEntity.getCreated())
                 .into(holder.pictureImage);
     }
 
@@ -65,9 +72,9 @@ public class MyPictureAdapter extends RecyclerView.Adapter<MyPictureAdapter.View
         public ViewHolder(View itemView) {
             super(itemView);
 
-            nameText = (TextView) itemView.findViewById(R.id.item_my_picture_name);
-            subjectText = (TextView) itemView.findViewById(R.id.item_my_picture_subject);
-            createdText = (TextView) itemView.findViewById(R.id.item_my_picture_created);
+            nameText = (TextView) itemView.findViewById(R.id.item_my_picture_name_text);
+            subjectText = (TextView) itemView.findViewById(R.id.item_my_picture_subject_text);
+            createdText = (TextView) itemView.findViewById(R.id.item_my_picture_day_text);
             pictureImage = (ImageView) itemView.findViewById(R.id.item_my_picture_image);
         }
     }

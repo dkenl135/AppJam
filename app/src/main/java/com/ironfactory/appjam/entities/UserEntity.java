@@ -22,11 +22,22 @@ public class UserEntity implements Serializable {
 
     public UserEntity(JSONObject object) {
         try {
+            id = object.getInt(PROPERTY_ID);
             name = object.getString(PROPERTY_NAME);
             phone = object.getString(PROPERTY_PHONE);
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean isSame(UserEntity userEntity) {
+        if (id != userEntity.id)
+            return false;
+        if (!name.equals(userEntity.name))
+            return false;
+        if (!phone.equals(userEntity.phone))
+            return false;
+        return true;
     }
 
     public int getId() {
